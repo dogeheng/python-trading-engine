@@ -1,0 +1,3 @@
+2025-01-09 15:23:55,709 [INFO] src.server.trading_server: Starting trading server on 0.0.0.0:12000
+2025-01-09 15:23:55,709 [INFO] src.core.matching_engine: Matched: B1 with S1 at 100.0 x 5
+2025-01-09 15:23:55,709 [INFO] src.server.trading_server: Executed 1 trades
