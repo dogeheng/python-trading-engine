@@ -1,7 +1,3 @@
-from src.core.order import Order, OrderSide
-from src.config.settings import ConfigLoader
-from src.server.trading_server import TradingServer
-from src.ui.strategies import get_strategy, STRATEGIES
 import streamlit as st
 import yfinance as yf
 import pandas as pd
@@ -12,15 +8,33 @@ import sys
 import os
 
 # Add the project root to the Python path
-root_dir = str(Path(__file__).parent.parent.parent)
-if root_dir not in sys.path:
-    sys.path.insert(0, root_dir)
+try:
+    # For local development
+    root_dir = str(Path(__file__).parent.parent.parent)
+    if root_dir not in sys.path:
+        sys.path.insert(0, root_dir)
+    from src.core.order import Order, OrderSide
+    from src.config.settings import ConfigLoader
+    from src.server.trading_server import TradingServer
+    from src.ui.strategies import get_strategy, STRATEGIES
+except ImportError:
+    # For deployment environment
+    sys.path.append(os.path.dirname(os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__)))))
+    from core.order import Order, OrderSide
+    from config.settings import ConfigLoader
+    from server.trading_server import TradingServer
+    from ui.strategies import get_strategy, STRATEGIES
 
 
 class TradingUI:
     def __init__(self):
-        self.config = ConfigLoader.load("appsettings.json")
-        self.server = TradingServer(self.config)
+        try:
+            self.config = ConfigLoader.load("appsettings.json")
+            self.server = TradingServer(self.config)
+        except Exception as e:
+            st.warning("Running in demo mode without server configuration")
+            self.server = None
 
     def load_stock_data(self, symbol: str, period: str = "1y"):
         """Load stock data from Yahoo Finance"""

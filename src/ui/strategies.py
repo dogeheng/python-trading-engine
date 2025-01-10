@@ -1,6 +1,18 @@
 from abc import ABC, abstractmethod
 import pandas as pd
 import numpy as np
+import sys
+import os
+from pathlib import Path
+
+# Add the project root to the Python path if needed
+try:
+    root_dir = str(Path(__file__).parent.parent.parent)
+    if root_dir not in sys.path:
+        sys.path.insert(0, root_dir)
+except Exception:
+    sys.path.append(os.path.dirname(os.path.dirname(
+        os.path.dirname(os.path.abspath(__file__)))))
 
 
 class TradingStrategy(ABC):
