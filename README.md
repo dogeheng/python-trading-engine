@@ -1,134 +1,116 @@
 # Python Trading Engine
 
-A robust, Python-based quantitative trading engine designed for algorithmic trading and strategy backtesting.
-
-## Overview
-
-This trading engine provides a flexible framework for developing, testing, and deploying quantitative trading strategies. It's built with Python to leverage its rich ecosystem of data analysis and machine learning libraries.
+A comprehensive trading engine with backtesting capabilities and an interactive web interface.
 
 ## Features
 
-- **Strategy Development Framework**
-  - Easy-to-use API for implementing trading strategies
-  - Support for multiple asset classes (stocks, futures, crypto, etc.)
-  - Custom indicator development capabilities
-  - Event-driven architecture for real-time trading
-
-- **Backtesting Engine**
-  - Historical data simulation
-  - Performance analytics and reporting
-  - Risk management tools
-  - Transaction cost modeling
-
-- **Live Trading**
-  - Real-time market data processing
-  - Order management system
-  - Risk controls and position monitoring
-  - Multiple broker integration support
-
-- **Data Management**
-  - Support for multiple data sources
-  - Efficient data storage and retrieval
-  - Real-time market data handling
-  - Historical data management
+- **Interactive Web Interface**: Built with Streamlit for easy visualization and interaction
+- **Multiple Trading Strategies**:
+  - SMA (Simple Moving Average) Crossover
+  - RSI (Relative Strength Index)
+  - MACD (Moving Average Convergence Divergence)
+- **Real-time Data**: Integration with Yahoo Finance API
+- **Advanced Backtesting**:
+  - Performance metrics (Total Return, Sharpe Ratio, Max Drawdown)
+  - Interactive charts with technical indicators
+  - Trading signals visualization
+- **Customizable Parameters**: Adjust strategy parameters in real-time
 
 ## Installation
 
+1. Clone the repository:
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/python-trading-engine.git
-
-# Navigate to the project directory
+git clone https://github.com/Sam-superlab/python-trading-engine.git
 cd python-trading-engine
+```
 
-# Install required dependencies
+2. Install dependencies:
+```bash
 pip install -r requirements.txt
 ```
 
-## Quick Start
+## Usage
 
-```python
-from trading_engine import Strategy, Backtest
-
-# Define your trading strategy
-class SimpleMovingAverageStrategy(Strategy):
-    def __init__(self):
-        self.short_window = 50
-        self.long_window = 200
-
-    def generate_signals(self, data):
-        # Strategy logic here
-        pass
-
-# Run backtest
-strategy = SimpleMovingAverageStrategy()
-backtest = Backtest(strategy, data)
-results = backtest.run()
+### Running the Trading Server
+To run the main trading server:
+```bash
+python main.py
 ```
+
+### Running the Web Interface
+To start the interactive web interface:
+```bash
+streamlit run src/ui/app.py
+```
+
+The web interface will be available at http://localhost:8501
+
+### Using the Web Interface
+
+1. **Select a Trading Strategy**:
+   - Choose from SMA Crossover, RSI, or MACD strategies
+   - Adjust strategy parameters using the sliders
+
+2. **Choose a Stock**:
+   - Enter any valid stock symbol (e.g., AAPL, GOOGL)
+   - Select the time period for analysis
+
+3. **Run Backtest**:
+   - Click "Run Backtest" to see the results
+   - View performance metrics and trading signals
+   - Analyze the interactive charts
 
 ## Project Structure
 
 ```
 python-trading-engine/
-├── docs/                 # Documentation
-├── examples/            # Example strategies and usage
-├── tests/              # Unit tests
-├── trading_engine/     # Main package
-│   ├── core/          # Core engine components
-│   ├── data/          # Data handling modules
-│   ├── strategy/      # Strategy base classes
-│   └── utils/         # Utility functions
-├── LICENSE
-└── README.md
+├── src/
+│   ├── config/         # Configuration settings
+│   ├── core/           # Core trading functionality
+│   ├── server/         # Trading server implementation
+│   ├── ui/             # Web interface components
+│   └── utils/          # Utility functions
+├── main.py             # Main server entry point
+└── requirements.txt    # Project dependencies
 ```
 
-## Documentation
+## Trading Strategies
 
-Detailed documentation is available in the `docs/` directory and includes:
-- API Reference
-- Strategy Development Guide
-- Configuration Guide
-- Deployment Instructions
+### SMA Crossover
+- Uses two moving averages (short and long-term)
+- Generates buy signals when short MA crosses above long MA
+- Generates sell signals when short MA crosses below long MA
+- Customizable window periods
 
-## Requirements
+### RSI Strategy
+- Measures overbought and oversold conditions
+- Generates buy signals when RSI drops below oversold level
+- Generates sell signals when RSI rises above overbought level
+- Adjustable RSI period and threshold levels
 
-- Python 3.8+
-- NumPy
-- Pandas
-- PyYAML
-- requests
-- websockets
+### MACD Strategy
+- Combines trend-following and momentum indicators
+- Generates buy signals when MACD crosses above signal line
+- Generates sell signals when MACD crosses below signal line
+- Customizable fast, slow, and signal periods
+
+## Performance Metrics
+
+- **Total Return**: Overall strategy performance
+- **Sharpe Ratio**: Risk-adjusted return metric
+- **Maximum Drawdown**: Largest peak-to-trough decline
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Feel free to submit issues, fork the repository, and create pull requests for any improvements.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Disclaimer
-
-This software is for educational purposes only. Do not risk money which you are afraid to lose. USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
-
-## Support
-
-For support and questions, please:
-- Open an issue in the GitHub repository
-- Join our community discussions
-- Check the documentation
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
 
 - Thanks to all contributors who have helped shape this project
-- Special thanks to the open-source community for providing valuable tools and libraries
+- Special thanks to the open-source community for providing valuable tools and 
+libraries
 - Special thanks to my love Risa for her support and encouragement
----
-
-Made with ❤️ by Sam Ren
